@@ -1,0 +1,21 @@
+# TÓM TẮT DỰ ÁN: GIÁM SÁT CHẤT LƯỢNG KHÔNG KHÍ ĐÔ THỊ
+
+Dự án triển khai Kho Dữ liệu (Data Warehouse - DW) theo kiến trúc Star Schema để phân tích và cung cấp cảnh báo sớm về chất lượng không khí tại Hà Nội, sử dụng dữ liệu từ các cảm biến.
+
+## I. Giai đoạn 1 & 2: Thiết kế và Triển khai ETL
+
+| Khía cạnh | Nội dung Đã Triển Khai | Giải pháp Kỹ thuật |
+| :--- | :--- | :--- |
+| **Mô hình Dữ liệu** | **Star Schema** (Mô hình Hình sao) | 1 Bảng Fact (`FactHourlyMeasurement`) và 3 Bảng Chiều (`DimLocation`, `DimDate`, `DimTime`). |
+| **Xử lý Dữ liệu** | Khắc phục dữ liệu nguồn (File CSV "phẳng"). | Sử dụng chuỗi khối **Derived Column**, **Data Conversion** (để chuẩn hóa mã hóa City $\rightarrow$ Unicode), và **Lookup** (Tra cứu khóa) thay vì kỹ thuật Join phức tạp. |
+| **Tra cứu Khóa** | Lấy 3 Khóa Ngoại (Foreign Keys) cho mỗi bản ghi: | **Lookup 1:** Nối City $\rightarrow$ LocationKey. **Lookup 2:** Nối LookupDate $\rightarrow$ DateKey. **Lookup 3:** Nối LookupHour $\rightarrow$ TimeKey. |
+
+## II. Giai đoạn 3: Phân tích và Cảnh báo (Power BI)
+
+| Khía cạnh | Công cụ & Tính năng | Mục tiêu Đạt được |
+| :--- | :--- | :--- |
+| **Mô hình BI** | **Power BI Model View** | Tái tạo chính xác Star Schema 1-\* để cho phép truy vấn đa chiều (OLAP). |
+| **Phân tích Thời gian thực** | **DAX Measure** | Tạo công thức `AQI Mới Nhất` để tìm ra giá trị AQI tại thời điểm mới nhất, giải quyết vấn đề lọc dữ liệu theo ngày và giờ. |
+| **Cảnh báo Sớm** | **Data Alerts (Power BI Service)** | Thiết lập quy tắc cảnh báo trên Thẻ AQI với điều kiện: **Above 150**. Hoàn thành yêu cầu cốt lõi về việc thông báo ngay lập tức khi chất lượng không khí vượt ngưỡng. |
+
+---
