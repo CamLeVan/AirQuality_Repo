@@ -34,10 +34,3 @@ Quá trình ETL (Extract-Transform-Load) sử dụng các cột sau để xây d
 
 ---
 
-### 🏁 Hoàn tất:
-
-1.  Dán nội dung trên vào cửa sổ Edit.
-2.  Cuộn xuống dưới cùng (trên giao diện GitHub).
-3.  Nhấn nút **"Commit changes..."** (Lưu thay đổi) để lưu tệp `README.md` của bạn.
-
-Bạn đã hoàn thành việc mô tả thư mục `Data` của mình.
